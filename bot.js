@@ -289,30 +289,6 @@ if (command == "embed") {
 
 
 client.on("ready", () => {
-  console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
-  client.user.setGame(``);
-});
-
-
-client.on("message", (message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  if (message.content.toLowerCase().startsWith(prefix + `help`)) {
-    const embed = new Discord.RichEmbed()
-    .setTitle(`:mailbox_with_mail: Ticket Help`)
-    .setColor(0xCF40FA)
-    .setDescription(`Hello! I'm Zaxs Community, the Discord bot for super cool support ticket stuff and more! Here are my commands:`)
-    .addField(`Tickets`, `[${prefix}new]() > Opens up a new ticket and tags the Support Team\n[${prefix}close]() > Closes a ticket that has been resolved or been opened by accident`)
-    .addField(`Other`, `[${prefix}help]() > Shows you this help menu your reading\n[${prefix}ping]() > Pings the bot to see how long it takes to react\n[${prefix}about]() > Tells you all about Vulnix`)
-    message.channel.send({ embed: embed });
-  }
-
-  if (message.content.toLowerCase().startsWith(prefix + `ping`)) {
-    message.channel.send(`Pinging...`).then(m => {
-    m.edit(`Ping : ` + (m.createdTimestamp - message.createdTimestamp) + `ms, Discord API : ` + Math.round(client.ping) + `MS`);
-    });
-}
-
 if (message.content.toLowerCase().startsWith(prefix + `new`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
