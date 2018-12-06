@@ -287,7 +287,6 @@ if (command == "embed") {
 
 });
 
-const prefix = "-";
 
 client.on("ready", () => {
   console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
