@@ -288,7 +288,7 @@ if (command == "embed") {
 });
 
 const prefix = "-";
-const token = "NTIwMTU1NDM0MjI5Njk0NDc1.DupwHA.t70RhC06fYerEyU7XVPjiHq-wJ8";
+const token = "";
 
 client.on("ready", () => {
   console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
