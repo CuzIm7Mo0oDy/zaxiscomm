@@ -143,3 +143,146 @@ client.on('message', message=> {
     message.reply("Hello, I'm Zaxis Community bot, My Prefix is ``-``");
     }
 });
+
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "kick") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  if (message.mentions.users.size < 1) return message.reply("**https://cdn.discordapp.com/attachments/498625534549295114/498825358682882059/kick_metion.png**");
+  if(!reason) return message.reply ("**https://cdn.discordapp.com/attachments/498625534549295114/498825956983701514/kick_reson.png**");
+  if (!message.guild.member(user)
+  .kickable) return message.reply("**This User Is Have High Role**");
+
+  message.guild.member(user).kick();
+
+  const kickembed = new Discord.RichEmbed()
+  .setAuthor(`KICKED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**Kicked By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : kickembed
+  })
+}
+});
+
+client.on('message', message => {
+    if(message.content.includes('discord.gg')){
+                                            if(!message.channel.guild) return message.reply('** advertising me on DM ? 🤔   **');
+        if (!message.member.hasPermissions(['ADMINISTRATOR'])){
+        message.delete()
+    return message.reply(`**ممنوع نشر الروابط :angry: !**`)
+    }
+}
+});
+
+const HeRo = new Discord.Client();
+client.on('message', message => {
+var prefix = "-";
+
+    if (message.content === prefix + "date") {
+        if (!message.channel.guild) return message.reply('** This command only for servers **');  
+        var currentTime = new Date(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+
+            var Date15= new Discord.RichEmbed()
+            .setTitle("**!~[ التاريخ ]~! **")
+            .setColor('RANDOM')
+            .setTimestamp()
+            .setDescription( ""+ Day + "-" + Month + "-" + Year + "")
+             message.channel.sendEmbed(Date15);
+    }
+});
+
+client.on('message',async msg => {
+  var p = "!";
+  if(msg.content.startsWith(p + "ocount")) {
+  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **No Permissions**');
+  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
+  msg.guild.createChannel(`loading :[]` , 'voice').then(time => {
+    time.overwritePermissions(msg.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+  setInterval(() => {
+      var currentTime = new Date(),
+Year = currentTime.getFullYear(),
+Month = currentTime.getMonth() + 1,
+Dat = currentTime.getDate()
+      time.setName(`Members : → ${msg.guild.members.size} ←`);
+ },1000);
+  });
+  }
+});
+
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
+:crown:اسم العضو  ${member}:crown:  
+انت العضو رقم ${member.guild.memberCount} `) 
+}).catch(console.error)
+})
+
+client.on('message', message => {
+
+  if (message.author.bot) return;
+
+  if (!message.content.startsWith(prefix)) return;
+
+
+  let command = message.content.split(" ")[0];
+
+  command = command.slice(prefix.length);
+
+
+  let args = message.content.split(" ").slice(1);
+
+
+// -say
+
+  if (command === "say") {
+
+          message.delete()
+
+    message.channel.sendMessage(args.join(" ")).catch(console.error);
+
+  }
+
+  
+
+ 
+
+
+if (command == "embed") {
+
+    let say = new Discord.RichEmbed()
+
+    .setDescription(args.join(" "))
+
+    .setColor(0x23b2d6)
+
+    message.channel.sendEmbed(say);
+
+    message.delete();
+
+  }
+
+
+
+});
