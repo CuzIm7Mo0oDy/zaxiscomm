@@ -287,6 +287,15 @@ if (command == "embed") {
 
 });
 
+const prefix = "-";
+const token = "NTIwMTU1NDM0MjI5Njk0NDc1.DupwHA.t70RhC06fYerEyU7XVPjiHq-wJ8";
+
+client.on("ready", () => {
+  console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
+  client.user.setGame(``);
+});
+
+
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -355,5 +364,3 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 }
 
 });
-
-client.login(token);
