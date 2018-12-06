@@ -67,3 +67,79 @@ return;
       return;
   }
 });
+
+client.on('message', message => {
+var prefix = "!";
+       if(message.content === prefix + "mutechannel") {
+                           if(!message.channel.guild) return message.reply('** This command only for servers**');
+
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
+              message.channel.overwritePermissions(message.guild.id, {
+            SEND_MESSAGES: false
+
+              }).then(() => {
+                  message.reply("**__تم تقفيل الشات__ ✅ **")
+              });
+                }
+//FIRE BOT
+    if(message.content === prefix + "unmutechannel") {
+                        if(!message.channel.guild) return message.reply('** This command only for servers**');
+
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
+              message.channel.overwritePermissions(message.guild.id, {
+            SEND_MESSAGES: true
+
+              }).then(() => {
+                  message.reply("**__تم فتح الشات__✅**")
+              });
+    }
+       
+});
+
+client.on('message', message => {
+var prefix = "-"
+    if (message.content.startsWith(prefix + 'clear')) {
+      if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(`ليس لديك برمشن[*MANAGE_MESSAGES*] `).catch(console.error);
+  message.delete()
+  if(!message.channel.guild) return;
+  let args = message.content.split(" ").slice(1);
+  
+  const messagecount = parseInt(args.join(' '));
+  
+  message.channel.fetchMessages({
+  
+  limit: messagecount
+  
+  }).then(messages => message.channel.bulkDelete(messages));
+  message.channel.sendMessage("", {embed: {
+    title: "``✏️✅ تــم مسح الشات ``",
+    color: 0x06DF00,
+    footer: {
+    
+    }
+    }}).then(msg => {msg.delete(3000)});
+  };
+  
+  });
+
+  client.on("message", (message) => {
+    if (message.content.startsWith("-ban")) {
+      if(!message.member.hasPermission('BAN_MEMBERS')) return message.reply('⚠ليست لديك صلاحية ');
+        var member= message.mentions.members.first();
+         if (message.mentions.users.size < 1) return message.reply("**المرجوا اختيار الشخص الذي تريد تبنيده **");
+        member.ban().then((member) => {
+            message.channel.send(member.displayName + " BANNED 👋 ");
+        }).catch(() => {
+            message.channel.send("⁉ Error 404 -_-");
+            //يجب وضع رول البوت الفوق
+        });
+    }
+});
+
+client.on('message', message=> {
+    if (message.author.bot) return;
+    if (message.isMentioned(client.user))
+    {
+    message.reply("Hello, I'm Zaxis Community bot, My Prefix is ``-``");
+    }
+});
